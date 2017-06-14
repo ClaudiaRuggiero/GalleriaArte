@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Opera: </title>
+</head>
+<body>
+<h1><span th:text= "'Titolo :' + ${painting.title}" ></span></h1>
+<p><span th:text= "'Anno :' + ${painting.year}" ></span></p>
+<p><span th:text= "'Tecnica :' + ${painting.tecnique}" ></span></p>
+<p><span th:text= "'Dimensioni :' + ${painting.size}" ></span></p>
+<p><span th:text= "'Autore :' + ${painting.author.nome}" ></span></p>
+</body>
+</html>

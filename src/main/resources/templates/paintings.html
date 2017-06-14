@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Opere</title>
+</head>
+<body>
+<h1> Quadri della Galleria: </h1>
+<ul>
+	<li th:each="painting : ${paintings}" >
+		<a th:href="@{/paintingDetails(id=${painting.id})" th:text="${painting.title}"> </a>
+	</li>
+</ul>
+</body>
+</html>

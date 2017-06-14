@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>NUOVO QUADRO</title>
+</head>
+<body>
+	<h1>Inserisci i dati del quadro:</h1>
+	<form action="#" th:action="@{/newPainting}" th:object="${painting}"
+		method="post">
+		<p>
+			<span th:text="#{label.title}">Titolo: </span> <span><input
+				type="text" th:field="*{painting.title}" /></span> <span
+				th:if="${#fields.hasErrors('title')}" th:text="#{label.mandatory}">Error</span>
+		</p>
+		<p>
+			<span th:text="#{label.year}">Anno: </span> <span><input
+				type="text" th:field="*{painting.year}" /></span> <span
+				th:if="${#fields.hasErrors('year')}" th:text="#{label.mandatory}">Error</span>
+		</p>
+		<p>
+			<span th:text="#{label.tecnique}">Tecnica: </span> <span><input
+				type="text" th:field="*{painting.tecnique}" /></span> <span
+				th:if="${#fields.hasErrors('tecnique')}" th:text="#{label.mandatory}">Error</span>
+		</p>
+		<p>
+			<span th:text="#{label.size}">Dimensioni: </span> <span><input
+				type="text" th:field="*{painting.size}" /></span> <span
+				th:if="${#fields.hasErrors('size')}" th:text="#{label.mandatory}">Error</span>
+		</p>
+	</form>
+
+</body>
+</html>
