@@ -15,8 +15,7 @@ color: white;
 background-image:
 		url('http://www.ktt.it/wp-content/uploads/2013/10/sfondo2.jpg');
 	padding-top: 100px;
-}
-button {
+} button {
     position:relative;
     top: 0%;
     right: 30%;
@@ -28,7 +27,7 @@ button {
 	<section id="navbar">
 		<div class="navbar navbar-fixed-top alt" data-spy="affix"
 			data-offset-top="1080">
-			<nav class="navbar navbar-inverse" role="navigation">
+	<nav class="navbar navbar-inverse" role="navigation">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -47,9 +46,13 @@ button {
 							<li><a th:href="@{/login}"> Accedi come Admin </a></li>
 							<li><a th:href="@{/adminRegistration}"> Registrati come
 									admin </a></li>
-							<li><a th:href="@{/paintingList}">Opere </a></li>
-							<li><a th:href="@{/artistList}">Artisti </a></li>
-							<li><a th:href="@{/findPainting}">Ricerca Opera </a></li>
+							<li><a th:href="@{/paintingList}">Opere
+									</a>
+								</li>
+								<li><a th:href="@{/artistList}">Artisti
+									</a>
+								</li>
+								<li><a th:href="@{/findPainting}">Ricerca Opera </a></li>
 							<li><a th:href="@{/findArtist}">Ricerca Artista </a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"> Operazioni admin <b class="caret"></b></a>
@@ -80,27 +83,26 @@ button {
 
 		<!-- Project One -->
 		<div class="col-md-15">
-			<img class="img-responsive" th:src="${painting.imageUrl}" alt=""
+			<img class="img-responsive" th:src="${artist.imageUrl}" alt=""
 				style="width: 400px; height: 300px;"></img>
 		</div>
 		<h3>
-			<b><span th:text="${painting.title}"></span></b>
+			<b><span th:text="${artist.firstname}+' '+${artist.lastname}"></span></b>
 		</h3>
 		<p>
-			<span th:text="'Anno : '+${painting.year}"></span>
+			<span th:text="'Nazionalità : '+${artist.nationality}"></span>
 		</p>
 		<p>
-			<span th:text="'Tecnica : '+${painting.tecnique}"></span>
+			<span th:text="'Data di nascita : '+${artist.dateOfBirth}"></span>
 		</p>
 		<p>
-			<span th:text="'Dimensioni : '+${painting.size}"></span>
-		</p>
-		<b> <a th:href="@{/artistDetails(id=${painting.artist.id})}"><span
-				th:text="${painting.artist.firstname}+' '+${painting.artist.lastname}"></span></a></b>
-		<p></p>
-		<form sec:authorize = "hasAuthority('ADMIN')" th:action="@{/deletePainting(id=${painting.id})}"
-			th:object="${painting}" method="POST">
-			<input type="submit" class="btn btn-secondary" value="Cancella Opera" />
+			<span th:text="'Data di morte : '+${artist.dateOfDeath}"></span></p>
+			<p th:each="painting : ${paintings}"> <b><a
+				th:href="@{/paintingDetails(id=${painting.id})}"
+					th:text="${painting.title}"></a></b></p> 
+		<form sec:authorize = "hasAuthority('ADMIN')" action="#" th:action="@{/deleteArtist(id=${artist.id})}"
+			th:object="${artist}" method="POST">
+			<input type="submit" class="btn btn-secondary" value="Cancella Artista"/>
 		</form>
 	</div>
 	<hr />

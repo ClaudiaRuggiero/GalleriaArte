@@ -17,7 +17,7 @@ public class PaintingService {
 	@Autowired
 	private PaintingRepository paintingRepository;
 	
-	public List<Painting> findAll() {
+	public List<Painting> findAllPaintings() {
 		return this.paintingRepository.findAll();
 	}
 	
@@ -30,8 +30,28 @@ public class PaintingService {
 		return this.paintingRepository.findOne(id);
 	}
 	
-	public List<Painting> findByAuthor(Artist author) {
-		List<Painting> paintings = new ArrayList<Painting>();
-		return paintings;
+	public List<Painting> findByTitle(String title) {
+		return this.paintingRepository.findByTitle(title);
 	}
+	
+	public List<Painting> findByYear(Integer year) {
+		return this.paintingRepository.findByYear(year);
+	}
+	
+	public List<Painting> findByTecnique(String tecnique) {
+		return this.paintingRepository.findByTecnique(tecnique);
+	}
+	
+	public List<Painting> findBySize(String size) {
+		return this.paintingRepository.findBySize(size);
+	}
+	
+	public List<Painting> findByAuthor(Artist author) {
+		return this.paintingRepository.findByArtist(author);
+	}
+	
+	public void deletePainting(Painting p) {
+		this.paintingRepository.delete(p.getId());
+	}
+	
 }

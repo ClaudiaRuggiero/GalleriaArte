@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http//:www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<title>NUOVO ARTISTA</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style> body { padding-top:50px;
-color: white;
-background-image:
-		url('http://www.ktt.it/wp-content/uploads/2013/10/sfondo2.jpg'); }
+<style>.form-horizontal {
+	padding-top: 40px;
+	padding-left: 35%;
+	position: center;
+}
 button {
     position:relative;
     top: 0%;
     right: 30%;
-    }</style>
-<title>ELENCO OPERE</title>
+    }
+.page-header { color:#d6d6c2;}
+body {
+color: white;
+background-image:
+		url('http://www.ktt.it/wp-content/uploads/2013/10/sfondo2.jpg');
+	padding-top: 70px;
+	
+}
+label {
+	position:relative;
+	right:35%;
+	}
+h2 {
+	text-align: center;
+   }</style>
 </head>
 <body>
 <section id="navbar">
@@ -65,34 +80,54 @@ button {
 			</nav>
 		</div>
 </section>
-	<div class="container">
-		<!-- Page Heading -->
-		<div class="row" >
-			<div class="col-lg-12">
-
-				<h2 class="page-header"> Quadri della Galleria:
-				 <small>  </small>
-				</h2>
-			</div>
-		</div>
-		<!-- /.row -->
-		<!-- Project One -->
-		<div class="row" th:each="painting : ${paintings}">
-		<hr/>
-			<div class="col-md-7">
-				<a th:href="@{/paintingDetails(id=${painting.id})}"> <img
-					class="img-responsive" th:src="${painting.imageUrl}" alt="" style="width:700px;height:300px;"></img>
-				</a>
-			</div>
-			<div class="col-md-5">
-				<h3><span th:text="${painting.title}"> </span></h3>
-				<h4> <span th:text="${painting.year}"> </span> </h4>
-				<p></p>
-				<a class="btn btn-primary" th:href="@{/paintingDetails(id=${painting.id})}">Dettagli Opera<span
-					class="glyphicon glyphicon-chevron-right"></span></a>
-			</div>
+<div id="form" align="center">
+<h1 class = "page-header"> <small>Inserisci dati</small> Artista</h1>
+	<form class="form-horizontal" th:action="@{/newArtist}"	th:object="${artist}" method="POST" >
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="firstname" class="col-2 col-form-label">Nome: </label>
+				<input class="form-control" type="text" th:field="*{firstname}" />
 		</div>
 	</div>
-	<!-- /.row -->
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="lastname" class="col-2 col-form-label">Cognome: </label>
+				<input class="form-control" type="text" th:field ="*{lastname}"/>
+			</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="dateOfBirth" class="col-2 col-form-label">Data di Nascita: </label>
+				<input class="form-control" type="text"	placeholder="dd-MM-yyyy" th:field="*{dateOfBirth}"/>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="dateOfDeath" class="col-2 col-form-label">Data di Morte: </label>
+				<input class="form-control" type="text" placeholder="dd-MM-yyyy" th:field="*{dateOfDeath}"/>
+			</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="nationality" class="col-2 col-form-label">Nazionalità</label>
+				<input class="form-control" type="text" th:field="*{nationality}"/>
+		</div>
+	
+	</div>
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="imageUrl" class="col-2 col-form-label">URL immagine: </label>
+				<input class="form-control" type="text" th:field="*{imageUrl}"/>
+		</div>
+	
+	</div>
+	<button class="btn btn-warning" type="submit"> Registra Artista </button>
+	</form>
+
+</div>
 </body>
 </html>

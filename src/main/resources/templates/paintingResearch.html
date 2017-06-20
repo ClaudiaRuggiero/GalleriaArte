@@ -1,24 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http//:www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style> body { padding-top:50px;
+<style>
+.page-header { color:#d6d6c2;}
+body {
 color: white;
 background-image:
-		url('http://www.ktt.it/wp-content/uploads/2013/10/sfondo2.jpg'); }
-button {
+		url('http://www.ktt.it/wp-content/uploads/2013/10/sfondo2.jpg');
+      padding-top: 120px;
+    }
+    h2 {
+    	text-align:center;
+    }
+    
+   #form{
+	padding-top: 30px;
+	padding-left: 0;
+   }
+   
+   button {
     position:relative;
     top: 0%;
     right: 30%;
-    }</style>
-<title>ELENCO OPERE</title>
+    }
+    #logout {
+    	margin-top: 5px;
+    }
+ 
+</style>
+<title>RICERCA OPERE</title>
+<meta charset="utf-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <section id="navbar">
@@ -46,7 +60,7 @@ button {
 								</li>
 								<li><a th:href="@{/artistList}">Artisti
 									</a>
-								</li><li><a th:href="@{/findPainting}">Ricerca Opera </a></li>
+								</li>
 							<li><a th:href="@{/findArtist}">Ricerca Artista </a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle" 
 							data-toggle="dropdown"> Operazioni admin  <b class="caret"></b></a>
@@ -65,34 +79,21 @@ button {
 			</nav>
 		</div>
 </section>
-	<div class="container">
-		<!-- Page Heading -->
-		<div class="row" >
-			<div class="col-lg-12">
+<div align="center">
+<span th:text = "${ErrorResearch}"></span>
+<h1 class = "page-header"> <small>cerca un'</small> Opera</h1>
 
-				<h2 class="page-header"> Quadri della Galleria:
-				 <small>  </small>
-				</h2>
-			</div>
-		</div>
-		<!-- /.row -->
-		<!-- Project One -->
-		<div class="row" th:each="painting : ${paintings}">
-		<hr/>
-			<div class="col-md-7">
-				<a th:href="@{/paintingDetails(id=${painting.id})}"> <img
-					class="img-responsive" th:src="${painting.imageUrl}" alt="" style="width:700px;height:300px;"></img>
-				</a>
-			</div>
-			<div class="col-md-5">
-				<h3><span th:text="${painting.title}"> </span></h3>
-				<h4> <span th:text="${painting.year}"> </span> </h4>
-				<p></p>
-				<a class="btn btn-primary" th:href="@{/paintingDetails(id=${painting.id})}">Dettagli Opera<span
-					class="glyphicon glyphicon-chevron-right"></span></a>
-			</div>
-		</div>
+	<form class="form-inline" th:action="@{/findPainting}" method="POST" id="form">
+		<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="value" name="value" /> 
+		In base a: 
+		<select class="form-control" name="attribute">
+			<option value="Title" selected="selected">Titolo</option>
+			<option value="Year">Anno</option>
+			<option value="Tecnique">Tecnica</option>
+			<option value="Artist">Autore</option>
+		</select> 
+		<input type="submit" class ="btn btn-warning" value="Cerca" />
+	</form>
 	</div>
-	<!-- /.row -->
 </body>
 </html>

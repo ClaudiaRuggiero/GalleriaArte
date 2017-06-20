@@ -7,7 +7,8 @@ import it.uniroma3.galleria.model.Artist;
 
 public interface ArtistRepository extends CrudRepository<Artist,Long> {
 
-	public Artist findByName(String name);
-	public Artist findBySurname(String surname);
+	public List<Artist> findByFirstname(String firstname);
+	public List<Artist> findByLastname(String lastname);
 	public List<Artist> findByNationality(String nationality);
+	public List<Artist> findAll();
 }

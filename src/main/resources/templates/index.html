@@ -1,12 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http//:www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<meta charset="ISO-8859-1"/>
-<title>Galleria d'Arte</title>
+<meta charset="UTF-8" />
+<title>Home</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+@import
+	url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700')
+	;
+
+html, body {
+	height: 100%;
+	font-family: 'Open Sans', arial, sans-serif;
+}
+button {
+    position:relative;
+    top: 0%;
+    right: 30%;
+    }
+
+a {
+	color: #222222;
+}
+
+.wrapper, .row {
+	height: 100%;
+	margin-left: 0;
+	margin-right: 0;
+	padding-top: 50px;
+}
+
+.wrapper:before, .wrapper:after, .column:before, .column:after {
+	content: "";
+	display: table;
+}
+
+.wrapper:after, .column:after {
+	clear: both;
+}
+
+.column {
+	height: 100%;
+	overflow: auto;
+	*zoom: 1;
+}
+
+.column .padding {
+	padding: 20px;
+}
+
+.box {
+	bottom: 0; /* increase for footer use */
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-image:
+		url('https://s-media-cache-ak0.pinimg.com/originals/f1/3b/5e/f13b5e757e85c841799edb96d2c3778b.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.divider {
+	margin-top: 32px;
+}
+
+#main {
+	background-color: #fefefe;
+}
+
+#footer {
+	margin-bottom: 20px;
+}
+
+/* bootstrap overrides */
+h1, h2, h3 {
+	font-weight: 800;
+	font-family: 'Open Sans', arial, sans-serif;
+}
+
+.label-default {
+	background-color: #dddddd;
+}
+
+.page-header {
+	margin-top: 55px;
+	padding-top: 9px;
+	border-top: 1px solid #eeeeee;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.col-sm-9.full {
+	width: 100%;
+}
+
+small.text-muted {
+	font-family: courier, courier-new, monospace;
+}
+</style>
 </head>
 <body>
-<h1> Galleria d'Arte </h1>
-<a href="/paintingList" > Elenco Opere </a>
-<a href="/loginAdmin" > Accedi come Admin </a>
+	<section id="navbar">
+		<div class="navbar navbar-fixed-top alt" data-spy="affix"
+			data-offset-top="1000">
+				<nav class="navbar navbar-inverse" role="navigation">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target=".navbar-ex1-collapse">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" th:href="@{/}"> Home </a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-ex1-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#"> ART GALLERY </a></li>
+							<li><a th:href="@{/login}"> Accedi come Admin </a></li>
+							<li><a th:href="@{/adminRegistration}"> Registrati come
+									admin </a></li>
+								</ul>
+						<ul class="nav navbar-nav navbar-right"
+							th:sec="hasAuthority('ADMIN')">
+							<li><form class="form-inline my-2 my-lg-0"
+									th:action="@{/logout}" method="POST" name="logout">
+									<button class="btn btn-outline-success my-2 my-sm-0"
+										type="submit">Log Out</button>
+								</form></li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</nav>
+			</div>
+	</section>
+	<div class="wrapper">
+
+		<div class="box">
+			<div class="row"></div>
+		</div>
+	</div>
+	<!-- main -->
+	<div class="column col-sm-9" id="main">
+		<div class="padding">
+			<div class="full col-sm-9">
+
+				<!-- content -->
+
+				<div class="col-sm-12" id="featured">
+					<div class="page-header text-muted">CERCA NELLA GALLERIA</div>
+				</div>
+
+				<!--/top story-->
+				<div class="row">
+					<div class="col-sm-10">
+						<ul>
+							<li>
+								<p>
+									<a th:href="@{/paintingList}"><b> Elenco Opere </b> </a>
+								</p>
+							</li>
+							<li><p>
+									<a th:href="@{/findPainting}"> <b>Ricerca Opera</b>
+									</a>
+								</p></li>
+							<li><p>
+									<a th:href="@{/artistList}"> <b>Elenco Artisti </b>
+									</a>
+								</p></li>
+							<li><p>
+									<a th:href="@{/findArtist}"> <b>Ricerca Artista </b>
+									</a>
+								</p></li>
+							<li><p><a th:href="@{/login}"><b>Accedi come Admin: </b> Per effettuare altre operazioni</a></p></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

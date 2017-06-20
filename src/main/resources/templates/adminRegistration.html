@@ -9,8 +9,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>LOGIN</title>
-<style>@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700');
+<title>SIGN IN</title>
+<style>
+@import
+	url('http://fonts.googleapis.com/css?family=Open+Sans:200,300,400,600,700')
+	;
+
 body {
 	background:
 		url('http://www.bhmpics.com/wallpapers/mountains_high_night-1920x1080.jpg');
@@ -29,7 +33,7 @@ body {
 }
 
 p.form-title {
-	font-family:'Open Sans',arial,sans-serif;
+	font-family: 'Open Sans', arial, sans-serif;
 	font-size: 40px;
 	font-weight: 600;
 	text-align: center;
@@ -181,53 +185,56 @@ form.login a:hover {
 	<section id="navbar">
 		<div class="navbar navbar-fixed-top alt" data-spy="affix"
 			data-offset-top="1000">
-		<nav class="navbar navbar-inverse" role="navigation">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target=".navbar-ex1-collapse">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" th:href="@{/}"> Home </a>
-					</div>
+			<nav class="navbar navbar-inverse" role="navigation">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" th:href="@{/}"> Home </a>
+				</div>
 
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse navbar-ex1-collapse">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#"> ART GALLERY </a></li>
-							<li><a th:href="@{/login}"> Accedi come Admin </a></li>
-							<li><a th:href="@{/adminRegistration}"> Registrati come
-									admin </a></li>
-									<li><a th:href="@{/paintingList}">Opere
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#"> ART GALLERY </a></li>
+						<li><a th:href="@{/login}"> Accedi come Admin </a></li>
+						<li><a th:href="@{/adminRegistration}"> Registrati come
+								admin </a></li>
+								<li><a th:href="@{/paintingList}">Opere
 									</a>
 								</li>
 								<li><a th:href="@{/artistList}">Artisti
 									</a>
-								</li><li><a th:href="@{/findPainting}">Ricerca Opera </a></li>
+								</li>
+								<li>
+								<a th:href="@{/findPainting}">Ricerca Opera </a></li>
 							<li><a th:href="@{/findArtist}">Ricerca Artista </a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown"> Operazioni admin <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a th:href="@{/newPainting}"> Inserisci nuova
-											opera </a></li>
-									<li><a th:href="@{/newArtist}"> Inserisci nuovo
-											artista </a></li>
-								</ul></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right"
-							th:sec="hasAuthority('ADMIN')">
-							<li><form class="form-inline my-2 my-lg-0"
-									th:action="@{/logout}" method="POST" name="logout">
-									<button class="btn btn-outline-success my-8 my-sm-0"
-										type="submit">Log Out</button>
-								</form></li>
-						</ul>
-					</div>
-					<!-- /.navbar-collapse -->
-				</nav>
-			</div>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"> Operazioni admin <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/newPainting}"> Inserisci nuova opera
+								</a></li>
+								<li><a th:href="@{/newArtist}"> Inserisci nuovo artista
+								</a></li>
+							</ul></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right"
+						th:sec="hasAuthority('ADMIN')">
+						<li><form class="form-inline my-2 my-lg-0"
+								th:action="@{/logout}" method="POST" name="logout">
+								<button class="btn btn-outline-success my-2 my-sm-0"
+									type="submit">Log Out</button>
+							</form></li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+		</div>
+
 	</section>
 	<div class="container">
 		<div class="row">
@@ -239,13 +246,20 @@ form.login a:hover {
 					</div>
 				</div>
 				<div class="wrap">
-					<p class="form-title">Accedi come Admin</p>
-					<form class="login" th:action="@{/login}" method="POST">
-					<div th:if="${param.error}" class="alert alert-error"> Invalid username or password</div>
-						<div th:if="${param.logout}" class="alert alert-success"> You have been logged out</div>
+
+					<p class="form-title">Registrati</p>
+					<form class="login" th:action="@{/adminRegistration}"
+						th:object="${admin}" method="POST">
 						<input type="text" placeholder="Username" id="username"
-							name="username" /> <input type="password" placeholder="Password"  name="password"/>
-							<button class="btn btn-outline-success my-8 my-sm-0" value="Log In"> Log In</button>
+							th:field="*{username}" name="username" /> <input type="text"
+							placeholder="Email" id="email" th:field="*{email}" name="email" />
+						<input type="password" placeholder="Password"
+							th:field="*{password}" /> <input type="text"
+							placeholder="FirstName" id="firstname" th:field="*{firstname}"
+							name="firstname" /> <input type="text" placeholder="Lastname"
+							id="lastname" th:field="*{lastname}" name="lastname" />
+						<button class="btn btn-outline-success my-8 my-sm-0"
+							value="Sign In">Sign In</button>
 					</form>
 				</div>
 			</div>

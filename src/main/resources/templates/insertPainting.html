@@ -1,34 +1,148 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1" />
-<title>NUOVO QUADRO</title>
+<meta charset="UTF-8" />
+<title>NUOVA OPERA</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+
+.form-horizontal {
+	padding-top: 40px;
+	padding-left: 35%;
+	position: center;
+}
+button {
+    position:relative;
+    top: 0%;
+    right: 30%;
+    }
+.page-header { color:#d6d6c2;}
+body {
+color: white;
+background-image:
+		url('http://www.ktt.it/wp-content/uploads/2013/10/sfondo2.jpg');
+	padding-top: 70px;
+	
+}
+label {
+	position:relative;
+	right:35%;
+	}
+h2 {
+	text-align: center;
+   }</style>
 </head>
 <body>
-	<h1>Inserisci i dati del quadro:</h1>
-	<form action="#" th:action="@{/newPainting}" th:object="${painting}"
-		method="post">
-		<p>
-			<span th:text="#{label.title}">Titolo: </span> <span><input
-				type="text" th:field="*{painting.title}" /></span> <span
-				th:if="${#fields.hasErrors('title')}" th:text="#{label.mandatory}">Error</span>
-		</p>
-		<p>
-			<span th:text="#{label.year}">Anno: </span> <span><input
-				type="text" th:field="*{painting.year}" /></span> <span
-				th:if="${#fields.hasErrors('year')}" th:text="#{label.mandatory}">Error</span>
-		</p>
-		<p>
-			<span th:text="#{label.tecnique}">Tecnica: </span> <span><input
-				type="text" th:field="*{painting.tecnique}" /></span> <span
-				th:if="${#fields.hasErrors('tecnique')}" th:text="#{label.mandatory}">Error</span>
-		</p>
-		<p>
-			<span th:text="#{label.size}">Dimensioni: </span> <span><input
-				type="text" th:field="*{painting.size}" /></span> <span
-				th:if="${#fields.hasErrors('size')}" th:text="#{label.mandatory}">Error</span>
-		</p>
+<section id="navbar">
+	<div class="navbar navbar-fixed-top alt" data-spy="affix" data-offset-top="1000">
+		<nav class="navbar navbar-inverse" role="navigation">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" th:href="@{/}" >  Home </a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#"> ART GALLERY </a></li>
+						<li><a th:href="@{/login}" > Accedi come Admin </a></li>
+						<li><a th:href="@{/adminRegistration}"> Registrati come admin </a></li>
+						<li><a th:href="@{/paintingList}">Opere
+									</a>
+								</li>
+								<li><a th:href="@{/artistList}">Artisti
+									</a>
+								</li><li><a th:href="@{/findPainting}">Ricerca Opera </a></li>
+							<li><a th:href="@{/findArtist}">Ricerca Artista </a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" 
+							data-toggle="dropdown"> Operazioni admin  <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/newPainting}"> Inserisci nuova opera </a> </li>
+								<li><a th:href="@{/newArtist}"> Inserisci nuovo artista </a></li>
+							</ul></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right" th:sec="hasAuthority('ADMIN')">
+					<li><form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST" name="logout">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Log Out </button> </form>
+						</li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+		</div>
+</section>
+	<div id="form" align="center">
+	<h1 class = "page-header"> <small>Inserisci dati</small> Opera</h1>
+	
+	<form class="form-horizontal" th:action="@{/newPainting}" th:object="${painting}"
+		method="post" >
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="title" class="col-2 col-form-label">Titolo: </label>
+				<input class="form-control" type="text" th:field="*{title}" />
+			<span
+				th:if="${#fields.hasErrors('title')}" th:text="#{label.mandatory}"></span>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="year" class="col-2 col-form-label">Anno: </label>
+				<input class="form-control" type="text" th:field ="*{year}" />
+				<span
+				th:if="${#fields.hasErrors('year')}" th:text="#{label.mandatory}"></span>
+			</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="tecnique" class="col-2 col-form-label">Tecnica: </label>
+				<input class="form-control" type="text"	th:field="*{tecnique}"/>
+				<span
+				th:if="${#fields.hasErrors('tecnique')}" th:text="#{label.mandatory}"></span>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="size" class="col-2 col-form-label">Dimensioni: </label>
+				<input class="form-control" type="text" th:field="*{size}"/>
+				<span
+				th:if="${#fields.hasErrors('title')}" th:text="#{label.mandatory}"></span>
+			</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-lg-5">
+			<label for="imageURL" class="col-5 col-form-label"> URL immagine:</label>
+				<input class="form-control" type="text" th:field="*{imageUrl}"/>
+				<span
+				th:if="${#fields.hasErrors('imageUrl')}" th:text="#{label.mandatory}"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-lg-5">
+		<b> Seleziona un autore: </b>
+		<select name="artist" th:field="*{artist}">
+		<option th:each="artist : ${artists}" th:value="${artist.id}" th:text="${artist.firstname}+' '+${artist.lastname}"> </option>
+		</select>
+		</div> </div>
+	<button class="btn btn-warning" type="submit">Inserisci</button>
 	</form>
+
+</div>
 
 </body>
 </html>
